@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button {
+      display: block;
+      margin: 5px;
+    }
+
+    #listArea2 {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="contentArea">
+    <p>Texto dentro de un contenedor.</p>
+  </section>
+  <section>
+    <ul id="listArea">
+
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 4</li>
+
+    </ul>
+  </section>
+
+  <ul id="listArea2">
+  <button id="prepend">prepend</button>
+  <button id="append">append</button>
+  <button id="before">before</button>
+  <button id="after">after</button>
+  </ul>
+  
+
+  <script src="removeElements.js"></script>
+</body>
+
+</html>
