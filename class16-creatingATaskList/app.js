@@ -17,6 +17,18 @@ function createTask(task) {
   taskList.append(liItem)
 }
 
+function deleteElementFromLocalStorage(task) {
+  const listOfTasks = JSON.parse(localStorage.getItem("tasks"))
+  const newList = listOfTasks.filter( (taskElement => taskElement != task.firstChild.textContent.trim()))
+  localStorage.setItem("tasks", JSON.stringify(newList))
+}
+
+function saveDeletedTasksInLocalStorage(task) {
+  const tasksDeleted = JSON.parse(localStorage.getItem('tasksDeleted')) || []
+  tasksDeleted.push(task.firstChild.textContent.trim())
+  localStorage.setItem('tasksDeleted', JSON.stringify(tasksDeleted))
+}
+
 function saveTasksInLocalStorage(task) {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || []
   tasks.push(task)
@@ -24,7 +36,7 @@ function saveTasksInLocalStorage(task) {
 }
 
 function loadTasksInLocalStorage(){ 
-  const taskList = JSON.parse(localStorage.getItem('tasks'))
+  const taskList = JSON.parse(localStorage.getItem('tasks')) || []
   taskList.forEach((task) => {
     createTask(task)
   })
@@ -51,6 +63,8 @@ taskForm.addEventListener('submit', (event) => {
 
 taskList.addEventListener('click', (event) => {
   if(event.target.classList.contains('delete-btn')) {
+    saveDeletedTasksInLocalStorage(event.target.parentElement)
+    deleteElementFromLocalStorage(event.target.parentElement)
     deleteTask(event.target.parentElement)
   } else if (event.target.classList.contains('edit-btn')) {
     editTask(event.target.parentElement)
