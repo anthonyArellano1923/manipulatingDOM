@@ -50,3 +50,8 @@ body.dark-theme {
 .dark-theme #task-list li {
   background: #444;
 }
+
+.delete-btn:hover,
+.edit-btn:hover {
+  cursor: pointer;
+}
