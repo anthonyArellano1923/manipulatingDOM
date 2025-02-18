@@ -2,6 +2,8 @@ const taskForm = document.getElementById('task-form');
 
 const taskList = document.getElementById('task-list');
 
+loadTasksInLocalStorage()
+
 function createTask(task) {
   const liItem = document.createElement('li');
   const deleteBtn = document.createElement('span')
@@ -13,6 +15,19 @@ function createTask(task) {
   liItem.textContent = task;
   liItem.append(deleteBtn, editBtn)
   taskList.append(liItem)
+}
+
+function saveTasksInLocalStorage(task) {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+  tasks.push(task)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+function loadTasksInLocalStorage(){ 
+  const taskList = JSON.parse(localStorage.getItem('tasks'))
+  taskList.forEach((task) => {
+    createTask(task)
+  })
 }
 
 function deleteTask(task){
@@ -31,6 +46,7 @@ taskForm.addEventListener('submit', (event) => {
   const taskInput = document.getElementById('task-input');
   const task = taskInput.value
   createTask(task)
+  saveTasksInLocalStorage(task)
 })
 
 taskList.addEventListener('click', (event) => {
