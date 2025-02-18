@@ -42,6 +42,12 @@ function loadTasksInLocalStorage(){
   })
 }
 
+function updateLocalStorage() {
+  const tasks = Array.from(taskList.querySelectorAll('li'))
+  const listUpdated = tasks.map((task) => task.firstChild.textContent)
+  localStorage.setItem('tasks', JSON.stringify(listUpdated))
+}
+
 function deleteTask(task){
   task.remove()
 }
@@ -68,5 +74,6 @@ taskList.addEventListener('click', (event) => {
     deleteTask(event.target.parentElement)
   } else if (event.target.classList.contains('edit-btn')) {
     editTask(event.target.parentElement)
+    updateLocalStorage()
   }
 })
