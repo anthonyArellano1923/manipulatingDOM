@@ -1,5 +1,6 @@
 const taskForm = document.getElementById('task-form');
 const taskList = document.getElementById('task-list');
+const toggleThemeBtn = document.getElementById('toggle-theme-btn')
 
 
 
@@ -87,6 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
       updateLocalStorage()
     }
   })
+
+  toggleThemeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme')
+    const theme = document.body.classList.contains('dark-theme') ? "dark" : "light"
+    localStorage.setItem("theme", theme)
+  })
+  if(localStorage.theme == 'dark'){
+    document.body.classList.add('dark-theme')
+  }
   loadTasksInLocalStorage();
 });
 
